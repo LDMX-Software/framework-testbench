@@ -1,0 +1,9 @@
+# HOME-like stuff from having denv here
+.bash_logout
+.bash_history
+.bashrc
+.local
+.profile
+
+# build directory to ignore
+build
