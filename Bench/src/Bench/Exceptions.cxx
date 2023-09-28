@@ -5,6 +5,15 @@
     EXCEPTION_RAISE("TEST",__FUNCTION__ ); \
   }
 
+#include "TSystem.h"
+
+int disable_ROOT_signal_handler() {
+  std::cout << "ROOT signal handler disabled" << std::endl;
+  for (int sig = 0; sig < kMAXSIGNALS; sig++) 
+    gSystem->ResetSignal((ESignals)sig);
+  return 0;
+}
+
 namespace bench {
 
 class Exceptions : public framework::Producer {
@@ -34,6 +43,10 @@ class Exceptions : public framework::Producer {
   }
 };  // Produce
 
+}
+
+namespace {
+int disable = disable_ROOT_signal_handler();
 }
 
 DECLARE_PRODUCER_NS(bench,Exceptions);
