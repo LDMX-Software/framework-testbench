@@ -2,7 +2,13 @@
 
 #define THROW_IF_MATCH() \
   if (when_ == __FUNCTION__) { \
-    EXCEPTION_RAISE("TEST",__FUNCTION__ ); \
+    if (type_ == "stl" ) { \
+      throw std::runtime_error(__FUNCTION__); \
+    } else if (type_ == "ldmx") { \
+      EXCEPTION_RAISE("TEST",__FUNCTION__ ); \
+    } else { \
+      EXCEPTION_RAISE("NoType",__FUNCTION__ ); \
+    } \
   }
 
 #include "TSystem.h"
@@ -17,6 +23,7 @@ int disable_ROOT_signal_handler() {
 namespace bench {
 
 class Exceptions : public framework::Producer {
+  std::string type_;
   std::string when_;
  public:
   Exceptions(const std::string& name, framework::Process& p)
@@ -24,6 +31,7 @@ class Exceptions : public framework::Producer {
   ~Exceptions() = default;
   void configure(framework::config::Parameters& ps) final override {
     when_ = ps.getParameter<std::string>("when");
+    type_ = ps.getParameter<std::string>("type");
     THROW_IF_MATCH()
   }
   void onProcessStart() final override {
