@@ -7,7 +7,10 @@ proc = ldmxcfg.Producer('Exceptions','bench::Exceptions','Bench')
 proc.when = sys.argv[1]
 
 p.maxEvents = 3
-p.sequence = [proc]
+p.sequence = [
+    ldmxcfg.Producer('Produce','bench::Produce','Bench'),
+    proc
+    ]
 p.termLogLevel = 0
 p.logFrequency = 1
-p.outputFiles = [ '/dev/null' ]
+p.outputFiles = [ 'test_exceptions.root' ]
