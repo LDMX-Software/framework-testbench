@@ -6,6 +6,7 @@ import sys
 proc = ldmxcfg.Producer('Exceptions','bench::Exceptions','Bench')
 proc.when = sys.argv[1]
 proc.type = sys.argv[2]
+proc.delay = 1
 
 p.maxEvents = 3
 p.sequence = [

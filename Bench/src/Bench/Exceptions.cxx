@@ -25,6 +25,7 @@ namespace bench {
 class Exceptions : public framework::Producer {
   std::string type_;
   std::string when_;
+  int delay_{0};
  public:
   Exceptions(const std::string& name, framework::Process& p)
     : framework::Producer(name,p) {}
@@ -32,6 +33,7 @@ class Exceptions : public framework::Producer {
   void configure(framework::config::Parameters& ps) final override {
     when_ = ps.getParameter<std::string>("when");
     type_ = ps.getParameter<std::string>("type");
+    delay_ = ps.getParameter<int>("delay");
     THROW_IF_MATCH()
   }
   void onProcessStart() final override {
@@ -44,7 +46,9 @@ class Exceptions : public framework::Producer {
     THROW_IF_MATCH()
   }
   void produce(framework::Event& event) final override {
-    THROW_IF_MATCH()
+    if (event.getEventNumber() > delay_) {
+      THROW_IF_MATCH()
+    }
   }
   void onProcessEnd() final override {
     THROW_IF_MATCH()
