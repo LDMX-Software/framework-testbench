@@ -1,4 +1,4 @@
 denv_name="framework-testbench"
 denv_image="ldmx/dev:latest"
-denv_shell="/bin/bash -i"
+denv_shell="/bin/bash -il"
 denv_mounts=""
