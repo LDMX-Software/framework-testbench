@@ -57,8 +57,10 @@ class Exceptions : public framework::Producer {
 
 }
 
+/*
 namespace {
 int disable = disable_ROOT_signal_handler();
 }
+*/
 
 DECLARE_PRODUCER_NS(bench,Exceptions);
