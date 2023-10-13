@@ -4,6 +4,7 @@
 .bashrc
 .local
 .profile
+.python_history
 
 # build directory to ignore
 build
