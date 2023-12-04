@@ -4,5 +4,5 @@ import uproot
 import sys
 
 with uproot.open(sys.argv[1]) as f:
-    print(f['LDMX_Events/EventHeader/tries_'].array(library='np'))
+    print(f['LDMX_Run/RunHeader/numTries_'].array(library='np'))
 
