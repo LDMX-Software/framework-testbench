@@ -26,14 +26,6 @@ with uproot.open(sys.argv[1]) as f:
         for name, timer in f[f'performance/{callback}'].items():
             print('  ', f'{name:10s}', f'{timer.members["duration_"]:.3e}', timer.members['start_time_'])
 
-    events = {}
     t = f['performance/by_event']
-    for name in t.keys(recursive=False):
-        if len(t[name].values()) == 0:
-            events[name] = t[name].array(library='np')
-        else:
-            events[name] = {
-                subbr.name : subbr.array(library='np')
-                for subbr in t[name].values()
-            }
+    events = t.arrays(expressions=t.keys(recursive=False), library='np')
     print(json.dumps(events, cls=ReprEncoder, indent=2))
