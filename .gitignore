@@ -5,6 +5,9 @@
 .local
 .profile
 .python_history
+.cache
+.ipython
+.lesshst
 
 # build directory to ignore
 build
