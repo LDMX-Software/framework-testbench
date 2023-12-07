@@ -27,5 +27,5 @@ with uproot.open(sys.argv[1]) as f:
             print('  ', f'{name:10s}', f'{timer.members["duration_"]:.3e}', timer.members['start_time_'])
 
     t = f['performance/by_event']
-    events = t.arrays(expressions=t.keys(recursive=False), library='np')
+    events = t.arrays(library='np')
     print(json.dumps(events, cls=ReprEncoder, indent=2))
